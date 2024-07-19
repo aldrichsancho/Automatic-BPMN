@@ -1,0 +1,394 @@
+<?xml version="1.0"?>
+  <definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="_2024041506798" targetNamespace="http://www.bizagi.com/definitions/_2024041506798" xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+    <collaboration id="collab_actor" name="Diagram BPMN">
+    <participant id="act_0" name="admin" processRef="process_act_0"></participant>
+    <participant id="act_1" name="pengguna" processRef="process_act_1"></participant>
+  </collaboration>
+  <process id="process_act_0" name="admin">
+    <documentation />
+    <startEvent id="start">
+      <outgoing>flow_0</outgoing>
+    </startEvent>
+    <task id="task_0" name="memasukan data mobil">
+      <incoming>flow_start event</incoming>
+      <outgoing>flow_1</outgoing>
+    </task>
+    <task id="task_16" name="menerima pesanan mobil">
+      <incoming>flow_15</incoming>
+      <outgoing>flow_17</outgoing>
+    </task>
+    <task id="task_17" name="melakukan konfirmasi pembayaran">
+      <incoming>flow_16</incoming>
+      <outgoing>flow_18</outgoing>
+    </task>
+    <task id="task_18" name="mengirimkan bukti sewa ke pengguna">
+      <incoming>flow_17</incoming>
+      <outgoing>flow_19</outgoing>
+    </task>
+  </process>
+  <process id="process_act_1" name="pengguna">
+    <documentation />
+    <task id="task_1" name="memilih kategori mobil">
+      <incoming>flow_0</incoming>
+      <outgoing>flow_2</outgoing>
+    </task>
+    <task id="task_2" name="memilih mobil">
+      <incoming>flow_1</incoming>
+      <outgoing>flow_3</outgoing>
+    </task>
+    <task id="task_3" name="memilih tanggal dan durasi peminjaman">
+      <incoming>flow_2</incoming>
+      <outgoing>flow_4</outgoing>
+    </task>
+    <exclusiveGateway id="gateway_4" gatewayDirection="Diverging">
+      <incoming>flow_3</incoming>
+      <outgoing>flow_3</outgoing>
+      <outgoing>flow_6</outgoing>
+    </exclusiveGateway>
+    <task id="task_6" name="menekan tombol reservasi">
+      <incoming>flow_2</incoming>
+      <outgoing>flow_7</outgoing>
+    </task>
+    <task id="task_7" name="mengecek detail reservasi">
+      <incoming>flow_6</incoming>
+      <outgoing>flow_8</outgoing>
+    </task>
+    <task id="task_8" name="menekan tombol">
+      <incoming>flow_7</incoming>
+      <outgoing>flow_9</outgoing>
+    </task>
+    <exclusiveGateway id="gateway_9" gatewayDirection="Diverging">
+      <incoming>flow_8</incoming>
+      <outgoing>flow_10</outgoing>
+      <outgoing>flow_12</outgoing>
+    </exclusiveGateway>
+    <task id="task_10" name="memasukan nama">
+      <incoming>flow_9</incoming>
+      <outgoing>flow_13</outgoing>
+    </task>
+    <task id="task_12" name="mendaftarkan akun">
+      <incoming>flow_9</incoming>
+      <outgoing>flow_13</outgoing>
+    </task>
+    <exclusiveGateway id="gateway_13" gatewayDirection="Converging">
+      <incoming>flow_10</incoming>
+      <incoming>flow_12</incoming>
+      <outgoing>flow_14</outgoing>
+    </exclusiveGateway>
+    <task id="task_14" name="memesan mobil">
+      <incoming>flow_13</incoming>
+      <outgoing>flow_15</outgoing>
+    </task>
+    <task id="task_15" name="membayar tagihan sesuai dengan tagihan yang tertara">
+      <incoming>flow_14</incoming>
+      <outgoing>flow_16</outgoing>
+    </task>
+    <task id="task_19" name="menerima bukti sewa">
+      <incoming>flow_18</incoming>
+      <outgoing>flow_-1</outgoing>
+    </task>
+    <endEvent id="flow_-1">
+      <incoming>flow_19</incoming>
+    </endEvent>
+    <sequenceFlow id="flow_event_start_task_0" sourceRef="start" targetRef="task_0">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_0_task_1" sourceRef="task_0" targetRef="task_1">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_16_task_17" sourceRef="task_16" targetRef="task_17">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_17_task_18" sourceRef="task_17" targetRef="task_18">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_18_task_19" sourceRef="task_18" targetRef="task_19">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_1_task_2" sourceRef="task_1" targetRef="task_2">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_2_task_3" sourceRef="task_2" targetRef="task_3">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_3_gateway_4" sourceRef="task_3" targetRef="gateway_4">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_gateway_4_task_3" sourceRef="gateway_4" targetRef="task_3" name=" tidak tersedia">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_gateway_4_task_6" sourceRef="gateway_4" targetRef="task_6" name=" mobil tersedia">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_6_task_7" sourceRef="task_6" targetRef="task_7">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_7_task_8" sourceRef="task_7" targetRef="task_8">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_8_gateway_9" sourceRef="task_8" targetRef="gateway_9">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_gateway_9_task_10" sourceRef="gateway_9" targetRef="task_10" name=" pengguna sudah terdaftar dalam aplikasi">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_gateway_9_task_12" sourceRef="gateway_9" targetRef="task_12" name=" pengguna belum terdaftar">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_10_gateway_13" sourceRef="task_10" targetRef="gateway_13">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_12_gateway_13" sourceRef="task_12" targetRef="gateway_13">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_gateway_13_task_14" sourceRef="gateway_13" targetRef="task_14">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_14_task_15" sourceRef="task_14" targetRef="task_15">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_15_task_16" sourceRef="task_15" targetRef="task_16">
+    </sequenceFlow>
+    <sequenceFlow id="flow_event_task_19_flow_-1" sourceRef="task_19" targetRef="flow_-1">
+    </sequenceFlow>
+  </process>
+ <BPMNDiagram id="DiagramBPMN" xmlns="http://www.omg.org/spec/BPMN/20100524/DI">
+   <BPMNPlane id="DiagramElement" bpmnElement="collab_actor">
+     <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+         <BPMNShape id="DiagramElement_admin_0" bpmnElement="act_0" isHorizontal="true">
+        <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+        <Bounds x="0" y="0" width="3030" height="350" xmlns="http://www.omg.org/spec/DD/20100524/DC"/>
+      </BPMNShape>
+      <BPMNShape id="DiagramElement_pengguna_1" bpmnElement="act_1" isHorizontal="true">
+        <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+        <Bounds x="0" y="350" width="3030" height="350" xmlns="http://www.omg.org/spec/DD/20100524/DC"/>
+      </BPMNShape>
+<BPMNShape bpmnElement="process_act_0" id="DiagramElement_process_act_0" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+</BPMNShape>
+<BPMNShape bpmnElement="start" id="DiagramElement_start" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="30" width="30" x="200" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="125">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_0" id="DiagramElement_task_0" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="400" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="125">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_16" id="DiagramElement_task_16" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="600" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="125">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_17" id="DiagramElement_task_17" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="800" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="125">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_18" id="DiagramElement_task_18" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="1000" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="125">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="process_act_1" id="DiagramElement_process_act_1" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="30" width="30" x="230" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="475">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_1" id="DiagramElement_task_1" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="430" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="475">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_2" id="DiagramElement_task_2" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="630" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="475">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_3" id="DiagramElement_task_3" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="830" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="475">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="gateway_4" id="DiagramElement_gateway_4" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="30" sign="diverging" width="30" x="1030" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="475">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_6" id="DiagramElement_task_6" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="1230" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="575">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_7" id="DiagramElement_task_7" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="1430" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="575">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_8" id="DiagramElement_task_8" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="1630" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="575">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="gateway_9" id="DiagramElement_gateway_9" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="30" sign="diverging" width="30" x="1830" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="475">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_10" id="DiagramElement_task_10" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="2030" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="575">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_12" id="DiagramElement_task_12" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="2230" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="575">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="gateway_13" id="DiagramElement_gateway_13" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="30" sign="converging" width="30" x="2430" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="475">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_14" id="DiagramElement_task_14" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="2630" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="475">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_15" id="DiagramElement_task_15" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="2830" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="475">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="task_19" id="DiagramElement_task_19" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="60" width="90" x="3030" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="475">
+ </Bounds>
+</BPMNShape>
+<BPMNShape bpmnElement="flow_-1" id="DiagramElement_flow_-1" isHorizontal="true">
+ <extension xmlns="http://www.omg.org/spec/DD/20100524/DI">
+ </extension>
+ <Bounds height="30" width="30" x="3230" xmlns="http://www.omg.org/spec/DD/20100524/DC" y="475">
+ </Bounds>
+</BPMNShape>
+    <BPMNEdge id="DiagramElement_flow_event_start_task_0" bpmnElement="flow_event_start_task_0">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="200" y="125" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="400" y="125" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_0_task_1" bpmnElement="flow_event_task_0_task_1">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="400" y="125" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="400" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="430" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_16_task_17" bpmnElement="flow_event_task_16_task_17">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="600" y="125" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="800" y="125" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_17_task_18" bpmnElement="flow_event_task_17_task_18">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="800" y="125" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1000" y="125" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_18_task_19" bpmnElement="flow_event_task_18_task_19">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1000" y="125" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1000" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="3030" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_1_task_2" bpmnElement="flow_event_task_1_task_2">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="430" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="630" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_2_task_3" bpmnElement="flow_event_task_2_task_3">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="630" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="830" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_3_gateway_4" bpmnElement="flow_event_task_3_gateway_4">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="830" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1030" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_gateway_4_task_3" bpmnElement="flow_event_gateway_4_task_3">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1030" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="830" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_gateway_4_task_6" bpmnElement="flow_event_gateway_4_task_6">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1060" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1060" y="605" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1230" y="605" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_6_task_7" bpmnElement="flow_event_task_6_task_7">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1230" y="575" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1430" y="575" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_7_task_8" bpmnElement="flow_event_task_7_task_8">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1430" y="575" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1630" y="575" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_8_gateway_9" bpmnElement="flow_event_task_8_gateway_9">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1630" y="575" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1630" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1830" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_gateway_9_task_10" bpmnElement="flow_event_gateway_9_task_10">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1860" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2230" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2030" y="605" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_gateway_9_task_12" bpmnElement="flow_event_gateway_9_task_12">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="1860" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2230" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2230" y="605" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_10_gateway_13" bpmnElement="flow_event_task_10_gateway_13">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2030" y="575" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2030" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2430" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_12_gateway_13" bpmnElement="flow_event_task_12_gateway_13">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2230" y="575" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2230" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2430" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_gateway_13_task_14" bpmnElement="flow_event_gateway_13_task_14">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2430" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2630" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_14_task_15" bpmnElement="flow_event_task_14_task_15">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2630" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2830" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_15_task_16" bpmnElement="flow_event_task_15_task_16">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2830" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="2830" y="125" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="600" y="125" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+    <BPMNEdge id="DiagramElement_flow_event_task_19_flow_-1" bpmnElement="flow_event_task_19_flow_-1">
+      <extension xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="3030" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+      <waypoint x="3230" y="475" xmlns="http://www.omg.org/spec/DD/20100524/DI" />
+    </BPMNEdge>
+   </BPMNPlane>
+ </BPMNDiagram>
+
+</definitions>
