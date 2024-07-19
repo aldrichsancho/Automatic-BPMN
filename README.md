@@ -2,6 +2,7 @@
 Generate BPMN using the recording of meeting notes
 
 **Install required libraries**
+
 pip install git+https://github.com/openai/whisper.git -q
 pip install nlp-id
 pip install Sastrawi
