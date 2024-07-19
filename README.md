@@ -2,13 +2,12 @@
 Generate BPMN using the recording of meeting notes
 
 **Install required libraries**
-
-pip install git+https://github.com/openai/whisper.git -q
-pip install nlp-id
-pip install Sastrawi
-pip install reportlab
-pip install BeautifulSoup4
-pip install ttkthemes
+1. pip install git+https://github.com/openai/whisper.git -q
+2. pip install nlp-id
+3. pip install Sastrawi
+4. pip install reportlab
+5. pip install BeautifulSoup4
+6. pip install ttkthemes
 
 **Usage**
 1. Open Terminal:
